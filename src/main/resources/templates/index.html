@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Lista personas</h1>
+        
+        <a th:href="@{/agregar}">Agregar persona</a>
+        
+        <br/><br/>
+        
+        <div th:if="${personas != null and !personas.empty}">
+            <table border="2">
+                <tr>
+                    <td>Id</td> 
+                    <td>Nombre</td>
+                    <td>Edad</td>
+                    <td>Profesion</td>
+                    <td>Modificar</td>
+                    <td>Eliminar</td>
+                </tr>
+                <tr th:each="persona : ${personas}">
+                    <td th:text="${persona.idpersonas}">Muestra el id</td>
+                    <td th:text="${persona.nombre}">Muestra el nombre</td>
+                    <td th:text="${persona.edad}">Muestra la edad</td>
+                    <td th:text="${persona.profesion}">Muestra la profesion</td>
+                    <td><a th:href="@{/cambiar/} + ${persona.idpersonas}" th:text="Cambiar"/></td>
+                    <td><a th:href="@{/eliminar/} + ${persona.idpersonas}">Eliminar</a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${personas == null or personas.empty}">
+            <span>La lista no tiene info</span>
+        </div>
+    </body>
+</html>
